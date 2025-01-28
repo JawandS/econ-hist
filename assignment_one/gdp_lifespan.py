@@ -18,7 +18,7 @@ y_axis = lifespan_data['2022'] # Life expectancy for 2022
 # drop if missing either data
 data = pd.DataFrame({'GDP': x_axis, 'Life Expectancy': y_axis}).dropna()
 # Plot the data
-plt.scatter(data['GDP'], data['Life Expectancy'])
+plt.scatter(data['GDP'], data['Life Expectancy'], color='black')
 # Add labels
 plt.title('GDP per Capita vs Life Expectancy in 2022')
 plt.xlabel('GDP per Capita (USD)')
