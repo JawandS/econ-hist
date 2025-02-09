@@ -41,3 +41,16 @@ plt.ylabel('Access to Electricity (% of population)')
 plt.title('Prevalence of Electricity vs Longitude')
 plt.savefig('/home/js/econ-hist/a_two/long_elec.png')
 plt.close()
+
+# Graph each point by lat/long with color intensity by electricity (red to green)
+plt.scatter(data['Longitude'], data['Latitude'], c=data['Electricity'], cmap='RdYlGn')
+plt.xlabel('Longitude of Country Capital')
+plt.ylabel('Latitude of Country Capital')
+# Set y axis to -90/90
+plt.ylim(-90, 90)
+# Set x axis to -180/180
+plt.xlim(-180, 180)
+plt.title('Location of Country Capital vs Electricity')
+plt.colorbar()
+plt.savefig('/home/js/econ-hist/a_two/lat_long_elec.png')
+plt.close()
