@@ -33,6 +33,11 @@ data = sa_corruption.join(sa_fdi)
 data = data.sort_values(by="FDI_2023", ascending=False)
 print(data)
 
+# Normalize the CPI score to be between 0 and 1
+data["CPI_2024"] = (data["CPI_2024"] - data["CPI_2024"].min()) / (data["CPI_2024"].max() - data["CPI_2024"].min())
+# Normalize the FDI score to be between 0 and 1
+data["FDI_2023"] = (data["FDI_2023"] - data["FDI_2023"].min()) / (data["FDI_2023"].max() - data["FDI_2023"].min())
+
 # Create choropleth map
 data = data.reset_index().rename(columns={"index": "country"})
 fig = px.choropleth(
@@ -55,7 +60,7 @@ fig.update_geos(
 # Reduce layout margins to remove extra space
 fig.update_layout(
     margin={"r":0, "t":30, "l":0, "b":0},  # Remove excess margins
-    coloraxis_colorbar=dict(title="CPI Score")  # Adjust color legend title
+    coloraxis_colorbar=dict(title="Normalized CPI Score")  # Adjust color legend title
 )
 fig.write_image("/home/js/econ-hist/mapping/corruption_map.png")
 
@@ -81,6 +86,6 @@ fig_two.update_geos(
 # Reduce layout margins to remove extra space
 fig_two.update_layout(
     margin={"r":0, "t":30, "l":0, "b":0},  # Remove excess margins
-    coloraxis_colorbar=dict(title="Net FDI")  # Adjust color legend title
+    coloraxis_colorbar=dict(title="Normalized Net FDI")  # Adjust color legend title
 )
 fig_two.write_image("/home/js/econ-hist/mapping/fdi_map.png")
